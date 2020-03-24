@@ -1,8 +1,8 @@
-Vue Default Starter
+Vuetify Gitfinder General
 
 ## Introduction
 
-Starter for Vue CLI 3
+
 
 ## Demo
 
@@ -46,4 +46,4 @@ A. Yes. This is perfectly normal.
 
 ## License
 
-[GPLv3](http://www.gnu.org/licenses/gpl-3.0.txt)
+MIT

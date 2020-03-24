@@ -23,17 +23,30 @@
           src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
           width="100"
         />
+      
+       
+       
       </div>
+     
+       <v-spacer></v-spacer>
+       <v-text-field
+          class="mt-6"
+          v-model="search" autofocus
+          @keyup.enter="searchData($event)"
+          label="Enter Github User Name"
+          append-icon="search"
+          ></v-text-field>
+           <v-spacer></v-spacer>
 
-      <v-spacer></v-spacer>
+     
 
       <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        to="/"
         target="_blank"
         text
       >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
+     
+        <v-icon>mdi-refresh</v-icon>
       </v-btn>
     </v-app-bar>
 
