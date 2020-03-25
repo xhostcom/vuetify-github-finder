@@ -1,6 +1,5 @@
 <template>
-  <v-app>
-      <v-app-bar
+   <v-app-bar
       app
       color="primary"
       dark
@@ -10,7 +9,7 @@
           alt="Vuetify Logo"
           class="shrink mr-2"
           contain
-          src="./assets/octo.webp"
+          src="../assets/octo.webp"
           transition="scale-transition"
           width="40"
         />
@@ -19,7 +18,7 @@
           class="shrink mt-1 hidden-sm-and-down"
           contain
           min-width="140"
-          src="./assets/gitfinder.webp"
+          src="../assets/gitfinder.webp"
           width="140"
         />
        </div>
@@ -41,36 +40,10 @@
       <v-icon>mdi-refresh</v-icon>
       </v-btn>
     </v-app-bar>
-     <v-content>
-      <h1>Gitfinder</h1>
-    </v-content>
-  </v-app>
 </template>
-
 <script>
-export default {
- name: 'App',
-   props: {
-    value: String
-  },
-    components: {
-  },
-  data: () => ({
-  localValue: "",
-  url_base: '#',
-  }),
-  created () {
-      this.localValue = this.value;
-      this.$watch("localValue", value => {
-      this.$emit("input", value);
-  });
- },
- methods: {
-        fetchData(e) {
-        if (e.key == "Enter") {
-        console.log(this.localValue);
-        }
-    }
- }
-};
+  export default {
+    name: 'Appbar',
+    data: () => ({ }),
+  }
 </script>
