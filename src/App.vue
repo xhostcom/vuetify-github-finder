@@ -1,30 +1,19 @@
 <template>
   <v-app>
-      <v-app-bar
-      app
-      color="primary"
+     <div>
+    <v-toolbar
       dark
-    >
-    <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="./assets/octo.webp"
-          transition="scale-transition"
-          width="40"
-        />
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="140"
-          src="./assets/gitfinder.webp"
-          width="140"
-        />
-       </div>
-       <v-spacer></v-spacer>
-       <v-text-field
+      src="./assets/bg.webp"
+      >
+      <v-btn
+       to="/"
+       target="_blank"
+       text
+       icon>
+        <v-icon>mdi-github-circle mdi-48px </v-icon>
+          </v-btn>
+          <v-spacer></v-spacer>
+          <v-text-field
           class="mt-6"
           v-model="localValue"
           autofocus
@@ -32,15 +21,16 @@
           label="Enter Github User Name"
           append-icon="search"
           ></v-text-field>
-           <v-spacer></v-spacer>
-        <v-btn
+         <v-spacer></v-spacer>
+         <v-btn
         to="/"
         target="_blank"
         text
-      >
-      <v-icon>mdi-refresh</v-icon>
+       icon>
+        <v-icon>mdi-refresh</v-icon>
       </v-btn>
-    </v-app-bar>
+    </v-toolbar>
+  </div>
      <v-content>
       <v-layout row wrap mt-12 mb-12 justify-center align-center class="profile-search">
       <v-container xs6 mt-12 mb-12 class="profile-details text-center">
