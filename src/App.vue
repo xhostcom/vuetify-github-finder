@@ -27,7 +27,7 @@
          target="_blank"
          text
          icon>
-        <v-icon>mdi-refresh</v-icon>
+        <v-icon>mdi-refresh mdi-36px</v-icon>
       </v-btn>
     </v-toolbar>
   </div>
@@ -85,21 +85,31 @@
     <v-row>
       <v-card>
       <v-list>
-     <v-subheader>REPORTS</v-subheader>
-        <v-list-item-group v-model="item" color="primary">
-          <v-list-item
-            v-for="(item, i) in items"
-            :key="i"
-            :inactive="inactive"
-          >
-            <v-list-item-avatar v-if="avatar">
-              <v-img :src="item.avatar"></v-img>
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title v-html="item.title"></v-list-item-title>
-              <v-list-item-subtitle v-if="twoLine || threeLine" v-html="item.subtitle"></v-list-item-subtitle>
-            </v-list-item-content>
+        <v-list-item-group color="primary">
+          <v-list-item>
+           Company
           </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>{{ details.company }}</v-list-item-title>
+           </v-list-item-content>
+            <v-list-item>
+           Company
+          </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>{{ details.company }}</v-list-item-title>
+           </v-list-item-content>
+            <v-list-item>
+           Company
+          </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>{{ details.company }}</v-list-item-title>
+           </v-list-item-content>
+            <v-list-item>
+           Company
+          </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>{{ details.company }}</v-list-item-title>
+           </v-list-item-content>
         </v-list-item-group>
       </v-list>
     </v-card>
@@ -108,7 +118,6 @@
   </v-content>
   </v-app>
 </template>
-
 <script>
 export default {
  name: 'App',
