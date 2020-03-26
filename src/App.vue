@@ -38,24 +38,24 @@
         <img class="user-img" :src="details.avatar_url" />
           <v-card-text>{{ details.bio }}</v-card-text>
           <v-card-body>
-           <v-btn  v-model="hide" to="/" color="info">View Profile</v-btn>
+           <v-btn to="/" color="secondary">View Profile</v-btn>
           </v-card-body>
            <br />
            <br />
-           </v-card>
-           </v-layout>
+      </v-card>
+     </v-layout>
     <v-layout class="profile-details" mt-12 mb-12 justify-center align-center>
     <v-badge
-     pr-4
+     dense
      color="secondary"
      left>
       <template v-slot:badge>
-        <span>{{ details.public_repos }}</span>
+      <span>{{ details.public_repos }}</span>
       </template>
       <span pr-4><strong> Public Repos </strong></span>
-    </v-badge>
-
+     </v-badge>
      <v-badge
+     dense
      color="primary"
      left>
       <template v-slot:badge>
@@ -64,16 +64,16 @@
       <span pr-4><strong> Public Gists  </strong></span>
     </v-badge>
      <v-badge
-     pr-4
+     dense
      color="success"
      left>
       <template v-slot:badge>
-        <span>{{ details.followers }}</span>
+      <span>{{ details.followers }}</span>
       </template>
       <span pr-4><strong> Followers  </strong></span>
     </v-badge>
      <v-badge
-     pr-4
+     dense
      color="warning"
      left>
       <template v-slot:badge>
@@ -83,17 +83,83 @@
     </v-badge>
     </v-layout>
      <v-layout class="profile-details" mt-12 mb-12 justify-center align-center>
-    <div class="table">
-		<ul id="horizontal-list">
-		<li><strong>Company:</strong> {{ details.company }}</li>
-    &nbsp;
-		<li><strong>Website:</strong> {{ details.blog }}</li>
-    &nbsp;
-		<li><strong>Location:</strong> {{ details.location }}</li>
-    &nbsp;
-		<li><strong>Member Since:</strong> {{ details.created_at }}</li>
-		</ul>
-		</div>
+    <v-alert
+      border="left"
+      color="red lighten-2"
+      dark
+    >
+     <span><strong> Company: </strong></span>   <span>{{ details.company }}</span>
+    </v-alert>
+    <v-alert
+      border="right"
+      color="blue-grey"
+      dark
+    >
+      <span><strong> Website: </strong></span>   <span>{{ details.blog }}</span>
+    </v-alert>
+    <v-alert
+      border="left"
+      color="pink darken-1"
+      dark
+    >
+     <span><strong> Location: </strong></span>   <span>{{ details.location }}</span>
+    </v-alert>
+    <v-alert
+      border="right"
+      color="indigo"
+      dark
+    >
+      <span><strong> Member Since: </strong></span>   <span>{{ details.created_at }}</span>
+    </v-alert>
+ </v-layout>
+  <v-layout class="repodata" mt-12 mb-12 justify-center align-center>
+  <div class="controls">
+          <v-btn to="/" class="btn-success btn-lg prev" @click="prev">Prev</v-btn>
+          <v-btn to="/" class="btn-success btn-lg next" @click="next">Next</v-btn>
+        </div>
+           <v-card class="text-center">
+           <v-card-title><h2 class="text-center section-title">Latest Repos</h2></v-card-title>
+           <h4 v-for="repo in repos" v-bind:key="repo.id" class="repo-name">{{ repo.name }} - <span>{{ repo.description }}</span></h4>
+         <div>
+    <v-alert
+      border="left"
+      color="red lighten-2"
+      dark
+    >
+     <span><strong> Created: </strong></span>   <span>{{ details.company }}</span>
+    </v-alert>
+    <v-alert
+      border="right"
+      color="blue-grey"
+      dark
+    >
+      <span><strong> Updated: </strong></span>   <span>{{ details.blog }}</span>
+    </v-alert>
+    <v-alert
+      border="left"
+      color="pink darken-1"
+      dark
+    >
+     <span><strong> Forks: </strong></span>   <span>{{ details.location }}</span>
+    </v-alert>
+    <v-alert
+      border="right"
+      color="indigo"
+      dark
+    >
+      <span><strong> Watchers: </strong></span>   <span>{{ details.created_at }}</span>
+    </v-alert>
+     <v-alert
+      border="right"
+      color="blue"
+      dark
+    >
+      <span><strong> Stars: </strong></span>   <span>{{ details.created_at }}</span>
+    </v-alert>
+  </div>
+           </v-card>
+           <br />
+            <v-btn to="/" color="success">View Repository</v-btn>
  </v-layout>
  </v-content>
   <Footer />
@@ -136,7 +202,13 @@ export default {
      this.details = results;
      document.querySelector(".profile-details").style.display = "block";
      document.querySelector(".repodata").style.display = "block";
-    }
+    },
+     getRepos() {
+         fetch(`${this.url_base}${this.localValue}` + '/repos')
+          .then(res => res.json())
+          .then(data => { this.repos = data });
+           console.log(this.repos);
+      },
   }
 }
 </script>
@@ -149,6 +221,7 @@ export default {
 body {
 	font-family: sans-serif;
 }
+.repodata,
 .profile-details {
   text-align:center;
   justify-content: center;
@@ -165,25 +238,12 @@ body {
 .profile-details {
 display: none;
 }
-.table {
-	display: table;
-	margin: 0 auto;
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 15px;
 }
-ul#horizontal-list {
-	min-width: 696px;
-	list-style: none;
-	padding-top: 20px;
-	}
-	ul#horizontal-list li {
-	display: inline;
-	}
-.repodata,
-/*.profile-details {
-  width: 100%;
-  text-align: center;
-  margin: 0 auto;
-  max-width: 768px;
-}*/
 .repo-name {
   color: #53565A;
   font-size: 32px;
