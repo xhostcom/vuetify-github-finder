@@ -32,7 +32,9 @@
     </v-toolbar>
   </div>
      <v-content>
-      <v-layout class="profile-details" mt-12 mb-12 justify-center align-center>
+     <v-container class="profile-details">
+     <v-layout row wrap mt-12 mb-12 justify-center align-center>
+      <v-flex xs12>
        <v-card flat light justify-center align-center>
         <h2 class="user-title text-center" justify-center align-center>{{ details.name }}</h2>
         <img class="user-img" :src="details.avatar_url" />
@@ -43,9 +45,12 @@
            <br />
            <br />
       </v-card>
+      </v-flex>
      </v-layout>
-    <v-layout class="profile-details" mt-12 mb-12 justify-center align-center>
-     <div>
+     </v-container>
+    <v-container class="profile-details">
+    <v-layout row wrap>
+    <v-flex xs12>
     <v-badge
      dense
      color="secondary"
@@ -82,15 +87,19 @@
       </template>
       <span pr-4><strong> Following </strong></span>
     </v-badge>
-    </div>
-    </v-layout>
-     <v-layout class="profile-details" mt-12 mb-12 justify-center align-center>
+      </v-flex>
+   </v-layout>
+ </v-container>
+  <v-container class="profile-details">
+     <v-layout row wrap mt-12 mb-12 justify-center align-center >
+      <v-flex xs12>
+       <div>
     <v-alert
       border="left"
       color="red lighten-2"
       dark
     >
-     <span><strong> Company: </strong></span>   <span>{{ details.company }}</span>
+     <span pl-4><strong> Company: </strong></span>   <span>{{ details.company }}</span>
     </v-alert>
     <v-alert
       border="right"
@@ -111,20 +120,25 @@
       color="indigo"
       dark
     >
-   <span><strong> Member Since: </strong></span>   <span>{{ details.created_at }}</span>
+   <span pr-4><strong> Member Since: </strong></span>   <span>{{ details.created_at }}</span>
     </v-alert>
+    </div>
+      </v-flex>
  </v-layout>
-  <v-layout class="repodata" mt-12 mb-12 justify-center align-center>
-    <v-flex>
-          <v-btn pr-4 to="/" color="success" class="prev" @click="prev">Prev</v-btn>
-          <v-btn pl-4 to="/" color="success" class="next" @click="next">Next</v-btn>
-          <br />
-          <br />
-           <h2>Latest Repos</h2>
-           <br />
-           <h4 v-for="repo in repos" v-bind:key="repo.id" class="repo-name">{{ repo.name }} - <span>{{ repo.description }}</span></h4>
+</v-container>
+   <v-container class="repodata">
+     <v-layout row wrapmt-12 mb-12 justify-center align-center >
+     <v-flex xs12>
+      <v-btn pr-4 to="/" color="success" class="prev" @click="prev">Prev</v-btn>
+     <v-btn pl-4 to="/" color="success" class="next" @click="next">Next</v-btn>
+     <br />
+     <br />
+     <h2>Latest Repos</h2>
+   <br />
+  <h4 v-for="repo in repos" v-bind:key="repo.id" class="repo-name">{{ repo.name }} - <span>{{ repo.description }}</span></h4>
   </v-flex>
  </v-layout>
+ </v-container>
  </v-content>
   <Footer />
   </v-app>
@@ -154,9 +168,15 @@ export default {
       this.$watch("localValue", value => {
       this.$emit("input", value);
   });
-   this.repos = this.repos[this.id];
+   this.current = this.repos[this.index];
+   this.repo = this.repos[this.id];
  },
  methods: {
+        view(repo) {
+          if (typeof repo != undefined) {
+             this.current = repo;
+          }
+        },
         fetchData(e) {
         if (e.key == "Enter") {
         fetch(`${this.url_base}${this.localValue}`)
@@ -178,7 +198,6 @@ export default {
            console.log(this.repos);
       },
   prev() {},
-  view() {},
   next() {}
   }
 }
@@ -211,7 +230,7 @@ display: none;
 }
 .repo-name {
   color: #53565A;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
