@@ -1,0 +1,35 @@
+ <v-badge
+     color="secondary"
+     left>
+      <template v-slot:badge>
+        <span>{{ details.company }}</span>
+      </template>
+      <span><strong> Company </strong></span>
+    </v-badge>
+     &nbsp;&nbsp;
+     <v-badge
+     color="primary"
+     left>
+      <template v-slot:badge>
+        <span>{{ details.blog }}</span>
+      </template>
+      <span><strong> Website  </strong></span>
+    </v-badge>
+     &nbsp;&nbsp;
+     <v-badge
+     color="success"
+     left>
+      <template v-slot:badge>
+        <span>{{ details.location }}</span>
+      </template>
+      <span><strong> Location  </strong></span>
+    </v-badge>
+     &nbsp;&nbsp;
+     <v-badge
+     color="warning"
+     left>
+      <template v-slot:badge>
+        <span>{{ details.created_at }}</span>
+      </template>
+      <span><strong> Member Since </strong></span>
+    </v-badge>

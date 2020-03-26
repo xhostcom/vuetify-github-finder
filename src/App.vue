@@ -23,47 +23,89 @@
           ></v-text-field>
          <v-spacer></v-spacer>
          <v-btn
-        to="/"
-        target="_blank"
-        text
-       icon>
+         to="/"
+         target="_blank"
+         text
+         icon>
         <v-icon>mdi-refresh</v-icon>
       </v-btn>
     </v-toolbar>
   </div>
      <v-content>
-      <v-layout row wrap mt-12 mb-12 justify-center align-center class="profile-search">
-      <v-container xs6 mt-12 mb-12 class="profile-details text-center">
-        <v-card>
-          <h2 class="user-title">{{ details.name }}</h2>
-        </v-card>
-          <img class="user-img" :src="details.avatar_url" width="200px;" />
-         <br />
-         <br />
-         <v-btn class="btn-dark btn-lg btn-block"><a href="#" style="color: #fff; text-decoration:none;">View Profile</a></v-btn>
-          <br />
-           <v-container xs6 mt-12 mb-12>
-            <v-card class="text-center">
-              <v-card-body>{{ details.bio }}</v-card-body>
-           </v-card>
-          </v-container>
+      <v-layout class="profile-details" mt-12 mb-12 justify-center align-center>
+       <v-card flat light justify-center align-center>
+        <h2 class="user-title text-center" justify-center align-center>{{ details.name }}</h2>
+        <img class="user-img" :src="details.avatar_url" />
+          <v-card-text>{{ details.bio }}</v-card-text>
+          <v-card-body>
+           <v-btn  v-model="hide" to="/" color="info">View Profile</v-btn>
+          </v-card-body>
            <br />
-               <v-container xs6 mt-12 mb-12>
-              <span class="badge badge-secondary"><strong>Public Repos:</strong>{{ details.public_repos }}</span>
-              <span class="badge badge-primary"><strong>Public Gists:</strong>{{ details.public_gists }}</span>
-              <span class="badge badge-success"><strong>Followers:</strong>{{ details.followers }}</span>
-              <span class="badge badge-info"><strong>Following:</strong>{{ details.following }}</span>
-              <br><br>
-              <ul class="list-group">
-             <li class="list-group-item d-flex justify-content-between align-items-center">Company: {{ details.company }}</li>
-             <li class="list-group-item d-flex justify-content-between align-items-center">Website/blog: <a href="#" target="_blank">{{ details.blog }}</a></li>
-             <li class="list-group-item d-flex justify-content-between align-items-center">Location: {{ details.location }}</li>
-             <li class="list-group-item d-flex justify-content-between align-items-center">Member Since: {{ details.created_at }}</li>
-           </ul>
-          </v-container>
-        </v-container>
+           <br />
+           </v-card>
+           </v-layout>
+    <v-layout class="profile-details" mt-12 mb-12 justify-center align-center>
+    <v-badge
+     color="secondary"
+     left>
+      <template v-slot:badge>
+        <span>{{ details.public_repos }}</span>
+      </template>
+      <span><strong> Public Repos </strong></span>
+    </v-badge>
+     &nbsp;&nbsp;
+     <v-badge
+     color="primary"
+     left>
+      <template v-slot:badge>
+        <span>{{ details.public_gists }}</span>
+      </template>
+      <span><strong> Public Gists  </strong></span>
+    </v-badge>
+     &nbsp;&nbsp;
+     <v-badge
+     color="success"
+     left>
+      <template v-slot:badge>
+        <span>{{ details.followers }}</span>
+      </template>
+      <span><strong> Followers  </strong></span>
+    </v-badge>
+     &nbsp;&nbsp;
+     <v-badge
+     color="warning"
+     left>
+      <template v-slot:badge>
+        <span>{{ details.following }}</span>
+      </template>
+      <span><strong> Following </strong></span>
+    </v-badge>
+    </v-layout>
+     <v-layout class="profile-details" mt-12 mb-12 justify-center align-center>
+    <v-row>
+      <v-card>
+      <v-list>
+     <v-subheader>REPORTS</v-subheader>
+        <v-list-item-group v-model="item" color="primary">
+          <v-list-item
+            v-for="(item, i) in items"
+            :key="i"
+            :inactive="inactive"
+          >
+            <v-list-item-avatar v-if="avatar">
+              <v-img :src="item.avatar"></v-img>
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title v-html="item.title"></v-list-item-title>
+              <v-list-item-subtitle v-if="twoLine || threeLine" v-html="item.subtitle"></v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-card>
+  </v-row>
      </v-layout>
-    </v-content>
+  </v-content>
   </v-app>
 </template>
 
@@ -115,7 +157,15 @@ export default {
 body {
 	font-family: sans-serif;
 }
+.profile-details {
+  text-align:center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 768px;
+}
 .user-img {
+  width:250px;
   border-radius: 50%;
   margin-top: 10px;
 }
@@ -123,17 +173,13 @@ body {
 .profile-details {
 display: none;
 }
-.profile-search {
-  margin-top:40px;
-}
 .repodata,
-.profile-details {
+/*.profile-details {
   width: 100%;
   text-align: center;
   margin: 0 auto;
-  margin-bottom: 30px;
   max-width: 768px;
-}
+}*/
 .repo-name {
   color: #53565A;
   font-size: 32px;
