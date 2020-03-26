@@ -27,20 +27,20 @@
          target="_blank"
          text
          icon>
-        <v-icon>mdi-refresh mdi-36px</v-icon>
+        <v-icon>mdi-refresh mdi-24px</v-icon>
       </v-btn>
     </v-toolbar>
   </div>
      <v-content>
      <v-container class="profile-details">
-     <v-layout row wrap justify-center align-center>
+     <v-layout row wrap justify-center align-center mt-6>
       <v-flex xs12>
        <v-card flat light justify-center align-center>
         <h2 class="user-title text-center" justify-center align-center>{{ details.name }}</h2>
         <img class="user-img" :src="details.avatar_url" />
           <v-card-text>{{ details.bio }}</v-card-text>
           <v-card-body>
-           <v-btn to="/" color="secondary">View Profile</v-btn>
+           <v-btn mt-6 to="/" color="secondary">View Profile</v-btn>
           </v-card-body>
            <br />
            <br />
@@ -188,6 +188,8 @@ export default {
     },
      setResults(results) {
      this.details = results;
+      document.querySelector(".top-details").style.display = "block";
+     document.querySelector(".details").style.display = "block";
      document.querySelector(".profile-details").style.display = "block";
      document.querySelector(".repodata").style.display = "block";
     },
@@ -228,6 +230,8 @@ body {
   border-radius: 50%;
   margin-top: 10px;
 }
+.top-details,
+.details,
 .repodata,
 .profile-details {
 display: none;
