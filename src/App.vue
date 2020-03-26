@@ -46,85 +46,68 @@
            </v-layout>
     <v-layout class="profile-details" mt-12 mb-12 justify-center align-center>
     <v-badge
+     pr-4
      color="secondary"
      left>
       <template v-slot:badge>
         <span>{{ details.public_repos }}</span>
       </template>
-      <span><strong> Public Repos </strong></span>
+      <span pr-4><strong> Public Repos </strong></span>
     </v-badge>
-     &nbsp;&nbsp;
+
      <v-badge
      color="primary"
      left>
       <template v-slot:badge>
         <span>{{ details.public_gists }}</span>
       </template>
-      <span><strong> Public Gists  </strong></span>
+      <span pr-4><strong> Public Gists  </strong></span>
     </v-badge>
-     &nbsp;&nbsp;
      <v-badge
+     pr-4
      color="success"
      left>
       <template v-slot:badge>
         <span>{{ details.followers }}</span>
       </template>
-      <span><strong> Followers  </strong></span>
+      <span pr-4><strong> Followers  </strong></span>
     </v-badge>
-     &nbsp;&nbsp;
      <v-badge
+     pr-4
      color="warning"
      left>
       <template v-slot:badge>
         <span>{{ details.following }}</span>
       </template>
-      <span><strong> Following </strong></span>
+      <span pr-4><strong> Following </strong></span>
     </v-badge>
     </v-layout>
      <v-layout class="profile-details" mt-12 mb-12 justify-center align-center>
-    <v-row>
-      <v-card>
-      <v-list>
-        <v-list-item-group color="primary">
-          <v-list-item>
-           Company
-          </v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>{{ details.company }}</v-list-item-title>
-           </v-list-item-content>
-            <v-list-item>
-           Company
-          </v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>{{ details.company }}</v-list-item-title>
-           </v-list-item-content>
-            <v-list-item>
-           Company
-          </v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>{{ details.company }}</v-list-item-title>
-           </v-list-item-content>
-            <v-list-item>
-           Company
-          </v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>{{ details.company }}</v-list-item-title>
-           </v-list-item-content>
-        </v-list-item-group>
-      </v-list>
-    </v-card>
-  </v-row>
-     </v-layout>
-  </v-content>
+    <div class="table">
+		<ul id="horizontal-list">
+		<li><strong>Company:</strong> {{ details.company }}</li>
+    &nbsp;
+		<li><strong>Website:</strong> {{ details.blog }}</li>
+    &nbsp;
+		<li><strong>Location:</strong> {{ details.location }}</li>
+    &nbsp;
+		<li><strong>Member Since:</strong> {{ details.created_at }}</li>
+		</ul>
+		</div>
+ </v-layout>
+ </v-content>
+  <Footer />
   </v-app>
 </template>
 <script>
+import Footer from '@/components/Footer';
 export default {
  name: 'App',
    props: {
     value: String
   },
     components: {
+      Footer
   },
   data: () => ({
   localValue: "",
@@ -153,8 +136,8 @@ export default {
      this.details = results;
      document.querySelector(".profile-details").style.display = "block";
      document.querySelector(".repodata").style.display = "block";
- }
-}
+    }
+  }
 }
 </script>
 <style>
@@ -182,6 +165,18 @@ body {
 .profile-details {
 display: none;
 }
+.table {
+	display: table;
+	margin: 0 auto;
+}
+ul#horizontal-list {
+	min-width: 696px;
+	list-style: none;
+	padding-top: 20px;
+	}
+	ul#horizontal-list li {
+	display: inline;
+	}
 .repodata,
 /*.profile-details {
   width: 100%;
@@ -243,8 +238,8 @@ button:hover {
   cursor: pointer;
 }
 .repos .repo.playing {
-  color: #FFF;
- background-color: #2d3436;
+color: #FFF;
+background-color: #2d3436;
 background-image: linear-gradient(315deg, #2d3436 0%, #000000 74%);
 }
 </style>
