@@ -45,6 +45,7 @@
       </v-card>
      </v-layout>
     <v-layout class="profile-details" mt-12 mb-12 justify-center align-center>
+     <div>
     <v-badge
      dense
      color="secondary"
@@ -81,6 +82,7 @@
       </template>
       <span pr-4><strong> Following </strong></span>
     </v-badge>
+    </div>
     </v-layout>
      <v-layout class="profile-details" mt-12 mb-12 justify-center align-center>
     <v-alert
@@ -109,57 +111,19 @@
       color="indigo"
       dark
     >
-      <span><strong> Member Since: </strong></span>   <span>{{ details.created_at }}</span>
+   <span><strong> Member Since: </strong></span>   <span>{{ details.created_at }}</span>
     </v-alert>
  </v-layout>
   <v-layout class="repodata" mt-12 mb-12 justify-center align-center>
-  <div class="controls">
-          <v-btn to="/" class="btn-success btn-lg prev" @click="prev">Prev</v-btn>
-          <v-btn to="/" class="btn-success btn-lg next" @click="next">Next</v-btn>
-        </div>
-           <v-card class="text-center">
-           <v-card-title><h2 class="text-center section-title">Latest Repos</h2></v-card-title>
-           <h4 v-for="repo in repos" v-bind:key="repo.id" class="repo-name">{{ repo.name }} - <span>{{ repo.description }}</span></h4>
-         <div>
-    <v-alert
-      border="left"
-      color="red lighten-2"
-      dark
-    >
-     <span><strong> Created: </strong></span>   <span>{{ details.company }}</span>
-    </v-alert>
-    <v-alert
-      border="right"
-      color="blue-grey"
-      dark
-    >
-      <span><strong> Updated: </strong></span>   <span>{{ details.blog }}</span>
-    </v-alert>
-    <v-alert
-      border="left"
-      color="pink darken-1"
-      dark
-    >
-     <span><strong> Forks: </strong></span>   <span>{{ details.location }}</span>
-    </v-alert>
-    <v-alert
-      border="right"
-      color="indigo"
-      dark
-    >
-      <span><strong> Watchers: </strong></span>   <span>{{ details.created_at }}</span>
-    </v-alert>
-     <v-alert
-      border="right"
-      color="blue"
-      dark
-    >
-      <span><strong> Stars: </strong></span>   <span>{{ details.created_at }}</span>
-    </v-alert>
-  </div>
-           </v-card>
+    <v-flex>
+          <v-btn pr-4 to="/" color="success" class="prev" @click="prev">Prev</v-btn>
+          <v-btn pl-4 to="/" color="success" class="next" @click="next">Next</v-btn>
+          <br />
+          <br />
+           <h2>Latest Repos</h2>
            <br />
-            <v-btn to="/" color="success">View Repository</v-btn>
+           <h4 v-for="repo in repos" v-bind:key="repo.id" class="repo-name">{{ repo.name }} - <span>{{ repo.description }}</span></h4>
+  </v-flex>
  </v-layout>
  </v-content>
   <Footer />
@@ -180,13 +144,17 @@ export default {
   details: {},
   avatar_url: "",
   url_base: 'https://api.github.com/users/',
-  index: 0
+  index: 0,
+  isViewing: false,
+  current: {},
+  repos: []
   }),
   created () {
       this.localValue = this.value;
       this.$watch("localValue", value => {
       this.$emit("input", value);
   });
+   this.repos = this.repos[this.id];
  },
  methods: {
         fetchData(e) {
@@ -209,6 +177,9 @@ export default {
           .then(data => { this.repos = data });
            console.log(this.repos);
       },
+  prev() {},
+  view() {},
+  next() {}
   }
 }
 </script>
@@ -238,15 +209,9 @@ body {
 .profile-details {
 display: none;
 }
-.controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px 15px;
-}
 .repo-name {
   color: #53565A;
-  font-size: 32px;
+  font-size: 20px;
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
@@ -255,12 +220,7 @@ display: none;
   font-weight: 400;
   font-style: italic;
 }
-.controls {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px 15px;
-}
+
 button {
   appearance: none;
   background: none;
@@ -271,14 +231,7 @@ button {
 button:hover {
   opacity: 0.8;
 }
-.next, .prev {
-  font-size: 16px;
-  font-weight: 700;
-  padding: 10px 20px;
-  margin: 0px 15px;
-  border-radius: 6px;
-  color: #FFF;
-}
+
 .repos {
   padding: 0px 30px;
 }
