@@ -1,6 +1,6 @@
 <template>
   <v-app>
-     <div>
+  <div>
     <v-toolbar
       dark
       src="./assets/bg.webp"
@@ -33,7 +33,7 @@
   </div>
      <v-content>
      <v-container class="profile-details">
-     <v-layout row wrap mt-12 mb-12 justify-center align-center>
+     <v-layout row wrap justify-center align-center>
       <v-flex xs12>
        <v-card flat light justify-center align-center>
         <h2 class="user-title text-center" justify-center align-center>{{ details.name }}</h2>
@@ -48,8 +48,8 @@
       </v-flex>
      </v-layout>
      </v-container>
-    <v-container class="profile-details">
-    <v-layout row wrap>
+    <v-container class="top-details">
+    <v-layout row wrap justify-center align-center>
     <v-flex xs12>
     <v-badge
      dense
@@ -90,8 +90,8 @@
       </v-flex>
    </v-layout>
  </v-container>
-  <v-container class="profile-details">
-     <v-layout row wrap mt-12 mb-12 justify-center align-center >
+  <v-container class="details">
+     <v-layout row wrap justify-center align-center>
       <v-flex xs12>
        <div>
     <v-alert
@@ -127,10 +127,10 @@
  </v-layout>
 </v-container>
    <v-container class="repodata">
-     <v-layout row wrapmt-12 mb-12 justify-center align-center >
+     <v-layout row wrap justify-center align-center >
      <v-flex xs12>
-      <v-btn pr-4 to="/" color="success" class="prev" @click="prev">Prev</v-btn>
-     <v-btn pl-4 to="/" color="success" class="next" @click="next">Next</v-btn>
+      <v-btn mr-4 to="/" color="success" class="prev" @click="prev">Prev</v-btn>
+     <v-btn ml-4 to="/" color="success" class="next" @click="next">Next</v-btn>
      <br />
      <br />
      <h2>Latest Repos</h2>
@@ -195,7 +195,6 @@ export default {
          fetch(`${this.url_base}${this.localValue}` + '/repos')
           .then(res => res.json())
           .then(data => { this.repos = data });
-           console.log(this.repos);
       },
   prev() {},
   next() {}
@@ -211,6 +210,11 @@ export default {
 body {
 	font-family: sans-serif;
 }
+.details {
+  width: 600px;
+  max-width: 600px;
+}
+.top-details,
 .repodata,
 .profile-details {
   text-align:center;
