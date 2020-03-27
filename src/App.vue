@@ -91,38 +91,46 @@
    </v-layout>
  </v-container>
   <v-container class="details">
-     <v-layout row wrap justify-center align-center>
+     <v-layout class="details" row wrap justify-center align-center>
       <v-flex xs12>
-       <div>
+
     <v-alert
+      class="alert"
       border="left"
       color="red lighten-2"
       dark
+      dense
     >
      <span pl-4><strong> Company: </strong></span>   <span>{{ details.company }}</span>
     </v-alert>
     <v-alert
+      class="alert"
       border="right"
       color="blue-grey"
       dark
+      dense
     >
       <span><strong> Website: </strong></span>   <span>{{ details.blog }}</span>
     </v-alert>
     <v-alert
+      class="alert"
       border="left"
       color="pink darken-1"
       dark
+      dense
     >
      <span><strong> Location: </strong></span>   <span>{{ details.location }}</span>
     </v-alert>
     <v-alert
+      class="alert"
       border="right"
       color="indigo"
       dark
+      dense
     >
    <span pr-4><strong> Member Since: </strong></span>   <span>{{ details.created_at }}</span>
     </v-alert>
-    </div>
+
       </v-flex>
  </v-layout>
 </v-container>
@@ -210,11 +218,14 @@ export default {
 	box-sizing: border-box;
 }
 body {
-	font-family: sans-serif;
+font-family: sans-serif;
 }
 .details {
-  width: 600px;
-  max-width: 600px;
+margin: 0 auto;
+}
+.alert {
+width: 90%;
+margin: 0 auto;
 }
 .top-details,
 .repodata,
@@ -222,8 +233,8 @@ body {
   text-align:center;
   justify-content: center;
   margin: 0 auto;
-  width: 100%;
-  max-width: 768px;
+  width: 600px;
+  max-width: 600px;
 }
 .user-img {
   width:250px;
@@ -247,27 +258,8 @@ display: none;
   font-weight: 400;
   font-style: italic;
 }
-
-button {
-  appearance: none;
-  background: none;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-button:hover {
-  opacity: 0.8;
-}
-
 .repos {
   padding: 0px 30px;
-}
-.repos h3 {
-  color: #212121;
-  font-size: 28px;
-  font-weight: 400;
-  margin-bottom: 30px;
-  text-align: center;
 }
 .repos .repo {
   display: block;
@@ -277,7 +269,7 @@ button:hover {
   font-weight: 700;
   cursor: pointer;
 }
-.repos .repo.playing {
+.repos .repo.viewing {
 color: #FFF;
 background-color: #2d3436;
 background-image: linear-gradient(315deg, #2d3436 0%, #000000 74%);
