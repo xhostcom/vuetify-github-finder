@@ -144,6 +144,7 @@
      <h2>Latest Repos</h2>
    <br />
   <h4 v-for="repo in repos" v-bind:key="repo.id" class="repo-name">{{ repo.name }} - <span>{{ repo.description }}</span></h4>
+
   </v-flex>
  </v-layout>
  </v-container>
@@ -219,6 +220,10 @@ export default {
 }
 body {
 font-family: sans-serif;
+}
+.prev,
+.next {
+  margin:8px;
 }
 .details {
 margin: 0 auto;
