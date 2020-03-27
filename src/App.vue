@@ -143,7 +143,7 @@
      <br />
      <h2>Latest Repos</h2>
    <br />
-  <h4 v-for="repo in repos" v-bind:key="repo.id" class="repo-name">{{ repo.name }} - <span>{{ repo.description }}</span></h4>
+  <!--<h4 v-for="repo in repoData" v-bind:key="repo.index" class="repo-name">{{ repoData.title }} - <span>{{ repoData.description }}</span></h4>-->
 
   </v-flex>
  </v-layout>
@@ -168,9 +168,10 @@ export default {
   avatar_url: "",
   url_base: 'https://api.github.com/users/',
   index: 0,
+  id: "",
   isViewing: false,
   current: {},
-  repos: []
+  repos: [],
   }),
   created () {
       this.localValue = this.value;
@@ -181,12 +182,7 @@ export default {
    this.repo = this.repos[this.id];
  },
  methods: {
-        view(repo) {
-          if (typeof repo != undefined) {
-             this.current = repo;
-          }
-        },
-        fetchData(e) {
+       fetchData(e) {
         if (e.key == "Enter") {
         fetch(`${this.url_base}${this.localValue}`)
         .then(res => {
@@ -197,7 +193,7 @@ export default {
     },
      setResults(results) {
      this.details = results;
-      document.querySelector(".top-details").style.display = "block";
+     document.querySelector(".top-details").style.display = "block";
      document.querySelector(".details").style.display = "block";
      document.querySelector(".profile-details").style.display = "block";
      document.querySelector(".repodata").style.display = "block";
@@ -205,7 +201,24 @@ export default {
      getRepos() {
          fetch(`${this.url_base}${this.localValue}` + '/repos')
           .then(res => res.json())
-          .then(data => { this.repos = data });
+          .then(data => { this.repos = data })
+          .then(this.setRepos)
+
+      },
+      setRepos() {
+         const repoData = [
+            {
+            id:this.repos.id,
+            },
+            {
+            title:this.repos.name,
+            },
+            {
+            description:this.repos.description,
+            }
+          ]
+         console.log("It Works, heres the data!");
+         console.log(repoData);
       },
   prev() {},
   next() {}
